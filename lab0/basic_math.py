@@ -64,9 +64,11 @@ def skew(x):
     Задание 3. Функция для расчета коэффициента асимметрии.
     Необходимо вернуть значение коэффициента асимметрии, округленное до 2 знаков после запятой.
     """
-    x = np.array(x)
-    skewness = sc.stats.skew(x, bias=False)
-    return round(skewness, 2)
+    x_i = sum(x) / len(x)
+    sigma = (sum([(num - x_i) ** 2 for num in x]) / len(x)) ** 0.5
+    m3 = (sum([(num - x_i) ** 3 for num in x]) / len(x))
+    a3 = m3 / sigma ** 3
+    return round(a3, 2)
 
 
 def kurtosis(x):
@@ -74,6 +76,8 @@ def kurtosis(x):
     Задание 3. Функция для расчета коэффициента эксцесса.
     Необходимо вернуть значение коэффициента эксцесса, округленное до 2 знаков после запятой.
     """
-    x = np.array(x)
-    kurt = sc.stats.kurtosis(x, fisher=True, bias=False)
-    return round(kurt, 2)
+    x_i = sum(x) / len(x)
+    sigma = (sum([(num - x_i) ** 2 for num in x]) / len(x)) ** 0.5
+    m4 = (sum([(num - x_i) ** 4 for num in x]) / len(x))
+    e4 = m4 / sigma ** 4 - 3
+    return round(e4, 2)
